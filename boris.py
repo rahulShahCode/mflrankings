@@ -18,9 +18,20 @@ def getTiers(pos):
     return requests.get((soup.find('object'))['data']).text
 
 # Parses the full tier list 
-def parse(str):
+def parse(lines):
+    tiers = [ [''] for i in range(len(lines)-1)]
 # Each line is read as:
 # Tier N: First Last, Player Name .. 
-
+    for line in lines:
+        m = re.match('Tier (\d+)', line)
+        if m is not None:
+            i = int(m.group(1)) - 1 
+            tiers[i] = line[8:].split(', ')
+    
+    return tiers 
+    
 
 data = getTiers(qb)
+
+tiers = parse(data.split('\n'))
+test(tiers)
