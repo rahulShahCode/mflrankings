@@ -34,4 +34,3 @@ def parse(lines):
 data = getTiers(qb)
 
 tiers = parse(data.split('\n'))
-test(tiers)
